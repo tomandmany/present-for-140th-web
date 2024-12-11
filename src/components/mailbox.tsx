@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 // @/app/components/Mailbox.tsx
 interface MailboxColors {
     main: string; // メインの色（例: 本体部分）
@@ -26,16 +28,17 @@ const borderVariant = 'border-2 border-black';
 
 interface MailboxProps {
     variant?: MailboxVariant; // 明示的なリテラル型で型補完対応
+    target: string;
 }
 
-export default function Mailbox({ variant = 'blue' }: MailboxProps) {
+export default function Mailbox({ variant = 'blue', target }: MailboxProps) {
     const colors = colorMap[variant];
 
     return (
-        <div className="hover:scale-110 transition cursor-pointer w-fit">
+        <Link href={`/${target}`} className="hover:scale-110 transition cursor-pointer w-fit">
             <MailboxHead colors={colors} />
             <MailboxFoot colors={colors} />
-        </div>
+        </Link>
     );
 }
 

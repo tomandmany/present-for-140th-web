@@ -63,6 +63,12 @@ export default {
         'mailbox-slot-inside': '3',
         'mailbox-slot-inside-t-bottom': '3',
       },
+      boxShadow: {
+        'back-button': '0 2px 2px gray',
+        'back-button-hover': '0 2px 5px gray',
+        'envelope': '2px 2px 2px gray',
+        'envelope-hover-scale': '0 2px 10px gray',
+      }
     },
   },
   plugins: [require('tailwindcss-animate')],
