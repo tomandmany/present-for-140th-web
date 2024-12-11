@@ -78,14 +78,14 @@ export default function Envelop() {
     // 蓋が開いた瞬間にスケール変更
     useEffect(() => {
         if (isOpenEnvelop && lidStatus === 'open') {
-            setEnvelopScale('scale-125');
+            setEnvelopScale('scale-125 translate-y-10');
         }
     }, [isOpenEnvelop, lidStatus]);
 
     // 手紙が inside になった瞬間にスケール変更
     useEffect(() => {
         if (!isOpenEnvelop && letterStatus === 'inside') {
-            setEnvelopScale('scale-100');
+            setEnvelopScale('');
         }
     }, [isOpenEnvelop, letterStatus]);
 

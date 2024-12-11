@@ -12,6 +12,15 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      borderRadius: {
+        mailbox: '50% / 100% 100% 0 0',
+      },
+      zIndex: {
+        'mailbox-body': '1',
+        'mailbox-slot': '2',
+        'mailbox-slot-inside': '3',
+        'mailbox-slot-inside-t-bottom': '3',
+      }
     },
   },
   plugins: [],
