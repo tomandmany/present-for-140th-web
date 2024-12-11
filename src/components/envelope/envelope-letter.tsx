@@ -12,17 +12,18 @@ interface EnvelopeLetterProps {
     };
     playSound: (speaker: 'lid' | 'letter') => void;
     letterStatus: string;
+    envelopeStyle: string;
     setLetterStatus: Dispatch<SetStateAction<'outside' | 'inside'>>;
     setEnvelopeStyle: Dispatch<SetStateAction<string>>;
 }
 
-export default function EnvelopeLetter({ isOpenEnvelope, lidStatus, currentMessage, playSound, letterStatus, setLetterStatus, setEnvelopeStyle }: EnvelopeLetterProps) {
+export default function EnvelopeLetter({ isOpenEnvelope, lidStatus, currentMessage, playSound, letterStatus, setLetterStatus, envelopeStyle, setEnvelopeStyle }: EnvelopeLetterProps) {
     // 手紙が inside になった瞬間にスケール変更
     useEffect(() => {
         if (!isOpenEnvelope && letterStatus === 'inside') {
             setEnvelopeStyle('');
         }
-    }, [isOpenEnvelope, letterStatus]);
+    }, [isOpenEnvelope, letterStatus, envelopeStyle]);
 
     const handleLetterStatus = () => {
         if (isOpenEnvelope) {
