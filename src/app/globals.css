@@ -19,3 +19,16 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.envelop-lid {
+  aspect-ratio: 1 / cos(30deg);
+  clip-path: polygon(0 0, 100% 0, 50% 70%);
+}
+
+.envelop-rotate {
+  transform: rotateX(180deg);
+}
+
+.envelop-lid-seal {
+  background-image: radial-gradient(circle, red, gray);
+}
