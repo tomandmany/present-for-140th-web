@@ -20,12 +20,12 @@ interface EnvelopeProps {
 }
 
 export default function Envelope({ writer, messages, target, isOpenEnvelope, setOpenWriter, color }: EnvelopeProps) {
-    const currentMessage = messages.find((message) => message.target === target && message.writer === writer);
-    if (!currentMessage) return null;
-
     const audioLidRef = useRef<HTMLAudioElement | null>(null);
     const audioLetterRef = useRef<HTMLAudioElement | null>(null);
-
+    
+    const currentMessage = messages.find((message) => message.target === target && message.writer === writer);
+    if (!currentMessage) return null;
+    
     const handleToggleEnvelope = (writer: string) => {
         if (!isOpenEnvelope) {
             playSound('lid');

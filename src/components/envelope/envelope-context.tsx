@@ -21,11 +21,11 @@ const targetMap: Record<string, string> = {
 const writers = ['maho', 'rin', 'oni', 'shoya'];
 
 export default function EnvelopeContext({ messages }: EnvelopeContextProps) {
+    const [openWriter, setOpenWriter] = useState<string | null>(null);
+
     const pathname = usePathname();
     if (!pathname) return null;
     const target = pathname.slice(1);
-
-    const [openWriter, setOpenWriter] = useState<string | null>(null);
 
     return (
         <div className="flex flex-col items-center gap-10">
