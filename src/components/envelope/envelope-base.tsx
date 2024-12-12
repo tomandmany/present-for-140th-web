@@ -7,8 +7,8 @@ const colorMap: Record<string, string> = {
   blue: 'bg-[#C2DDFC]',
 }
 
-export default function EnvelopeBase({color}: EnvelopeBaseProps) {
+export default function EnvelopeBase({ color }: EnvelopeBaseProps) {
   return (
-    <div className={`${colorMap[color]} absolute left-0 top-0 w-full h-full border border-black z-10`} />
+    <div className={`${colorMap[color]} absolute left-0 top-0 w-full h-full border border-black z-envelope-base`} />
   )
 }

@@ -35,7 +35,7 @@ export default function Mailbox({ variant = 'blue', target }: MailboxProps) {
     const colors = colorMap[variant];
 
     return (
-        <Link href={`/${target}`} className="hover:scale-110 transition cursor-pointer w-fit">
+        <Link href={`/${target}`} className="hover:scale-110 transition cursor-pointer w-fit relative z-mailbox">
             <MailboxHead colors={colors} />
             <MailboxFoot colors={colors} />
         </Link>

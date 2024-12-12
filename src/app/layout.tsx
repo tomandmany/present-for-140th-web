@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Image from "next/image";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,6 +30,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#FFF8FA]`}
       >
         {children}
+        <Image
+          src={"/bg-heart.png"}
+          alt="背景のハート"
+          width={800}
+          height={100}
+          className="w-full max-w-[600px] h-[400px] fixed bottom-0 left-1/2 -translate-x-1/2 z-bg-heart"
+        />
       </body>
     </html>
   );

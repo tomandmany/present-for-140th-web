@@ -23,16 +23,20 @@ export default function Envelope({ writer, messages, target, isOpenEnvelope, set
     const audioLidRef = useRef<HTMLAudioElement | null>(null);
     const audioLetterRef = useRef<HTMLAudioElement | null>(null);
     const [lidStatus, setLidStatus] = useState<'open' | 'close'>('close');
-    const [letterStatus, setLetterStatus] = useState<'inside' | 'outside'>('inside');
+    const [letterStatus, setLetterStatus] = useState<'inside' | 'up' | 'center'>('inside');
+    // const [letterStatus, setLetterStatus] = useState<'inside' | 'outside'>('inside');
 
     const [envelopeStyle, setEnvelopeStyle] = useState(''); // スケールクラス
 
     // 蓋が開いた瞬間にスケール変更
     useEffect(() => {
         if (isOpenEnvelope && lidStatus === 'open') {
-            setEnvelopeStyle('scale-125 translate-y-10 duration-500 shadow-envelope-hover-scale');
+            setEnvelopeStyle('scale-125 translate-y-10 duration-500 shadow-none z-envelope');
         }
-    }, [isOpenEnvelope, lidStatus]);
+        if (!isOpenEnvelope) {
+            setEnvelopeStyle('');
+        }
+    }, [isOpenEnvelope, lidStatus]);    
 
     const currentMessage = messages.find((message) => message.target === target && message.writer === writer);
     if (!currentMessage) return null;
@@ -62,14 +66,14 @@ export default function Envelope({ writer, messages, target, isOpenEnvelope, set
 
     return (
         <div
-            className={`relative w-[212px] h-[122px] z-10 cursor-pointer transition hover:duration-200 shadow-envelope hover:shadow-envelope-hover-scale bg-[#bababa] ${envelopeStyle}`}
-            onClick={() => handleToggleEnvelope(writer)}
+            className={`relative w-[212px] h-[122px] cursor-pointer transition hover:duration-200 shadow-envelope hover:shadow-envelope-hover bg-[#bababa] ${envelopeStyle}`}
+            // onClick={() => handleToggleEnvelope(writer)}
         >
             <audio ref={audioLidRef} src="/audio/lid.mp3" />
             <audio ref={audioLetterRef} src="/audio/letter.mp3" />
             <EnvelopeBase color={color} />
-            <EnvelopeLid color={color} isOpenEnvelope={isOpenEnvelope} lidStatus={lidStatus} setLidStatus={setLidStatus} letterStatus={letterStatus} playSound={playSound} />
-            <EnvelopeLetter isOpenEnvelope={isOpenEnvelope} lidStatus={lidStatus} currentMessage={currentMessage} playSound={playSound} letterStatus={letterStatus} setLetterStatus={setLetterStatus} envelopeStyle={envelopeStyle} setEnvelopeStyle={setEnvelopeStyle} />
+            <EnvelopeLid color={color} isOpenEnvelope={isOpenEnvelope} lidStatus={lidStatus} setLidStatus={setLidStatus} letterStatus={letterStatus} playSound={playSound} writer={writer} handleToggleEnvelope={handleToggleEnvelope} />
+            <EnvelopeLetter isOpenEnvelope={isOpenEnvelope} lidStatus={lidStatus} currentMessage={currentMessage} playSound={playSound} letterStatus={letterStatus} setLetterStatus={setLetterStatus} envelopeStyle={envelopeStyle} setEnvelopeStyle={setEnvelopeStyle} writer={writer} handleToggleEnvelope={handleToggleEnvelope} />
         </div>
     );
 }

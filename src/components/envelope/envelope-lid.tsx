@@ -6,9 +6,11 @@ interface EnvelopeLidProps {
     isOpenEnvelope: boolean;
     lidStatus: 'open' | 'close';
     setLidStatus: Dispatch<SetStateAction<'open' | 'close'>>;
-    letterStatus: 'inside' | 'outside';
+    letterStatus: 'inside' | 'up' | 'center';
     playSound: (speaker: 'lid' | 'letter') => void;
     color: string;
+    writer: string;
+    handleToggleEnvelope: (writer: string) => void;
 }
 
 const colorMap: Record<string, string> = {
@@ -16,7 +18,7 @@ const colorMap: Record<string, string> = {
     blue: 'bg-[#C2DDFC]',
 };
 
-export default function EnvelopeLid({ isOpenEnvelope, lidStatus, setLidStatus, letterStatus, playSound, color }: EnvelopeLidProps) {
+export default function EnvelopeLid({ isOpenEnvelope, lidStatus, setLidStatus, letterStatus, playSound, color, writer, handleToggleEnvelope }: EnvelopeLidProps) {
     const [isLidRotationHalf, setIsLidRotationHalf] = useState(false); // トランジションの途中状態
     const transitionDuration = 500; // トランジションの時間 (ms)
 
@@ -44,7 +46,7 @@ export default function EnvelopeLid({ isOpenEnvelope, lidStatus, setLidStatus, l
         <>
             {/* 封筒の蓋全体 */}
             <div
-                className={`relative z-20 origin-top transition-transform duration-500 ${isOpenEnvelope
+                className={`relative origin-top transition-transform duration-500 z-envelope-lid ${isOpenEnvelope
                     ? 'duration-[.5s] envelop-rotate'
                     : lidStatus === 'open'
                         ? letterStatus === 'inside'
@@ -54,12 +56,14 @@ export default function EnvelopeLid({ isOpenEnvelope, lidStatus, setLidStatus, l
                     }`}
                 onTransitionStart={handleLidTransitionStart}
                 onTransitionEnd={handleLidTransitionEnd}
+                onClick={() => handleToggleEnvelope(writer)}
             >
                 {/* 封筒の蓋本体 */}
                 <div
-                    className={`relative envelop-lid bg-black w-[212px] h-[122px] transition
-                        ${isLidRotationHalf ? 'z-20' : 'z-10'}
-                    `}
+                    // className={`relative envelop-lid bg-black w-[212px] h-[122px] transition
+                    //     ${isLidRotationHalf ? 'z-20' : 'z-10'}
+                    // `}
+                    className={`relative envelop-lid bg-black w-[212px] h-[122px] transition`}
                 >
                     {/* 蓋の内側 */}
                     <div className={`${colorMap[color]} envelop-lid absolute left-[3px] top-[1px] w-[206px] h-[119px]`} />
