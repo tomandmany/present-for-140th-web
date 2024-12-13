@@ -11,15 +11,15 @@ type MailboxVariant = 'blue' | 'pink' | 'orange';
 
 const colorMap: Record<MailboxVariant, MailboxColors> = {
     blue: {
-        main: 'bg-[#7D8FE8]',
+        main: 'bg-[#92A4FF]',
         sub: 'bg-[#BED0FF]',
     },
     pink: {
-        main: 'bg-[#DA85EB]',
-        sub: 'bg-[#FFC9FF]',
+        main: 'bg-[#F59997]',
+        sub: 'bg-[#FCC0DC]',
     },
     orange: {
-        main: 'bg-[#F5AA73]',
+        main: 'bg-[#FFCAA4]',
         sub: 'bg-[#FFEBBF]',
     },
 };

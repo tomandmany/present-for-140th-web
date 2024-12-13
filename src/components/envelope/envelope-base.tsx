@@ -3,8 +3,10 @@ interface EnvelopeBaseProps {
 }
 
 const colorMap: Record<string, string> = {
-  pink: 'bg-[#FCC3C2]',
-  blue: 'bg-[#C2DDFC]',
+  blue: 'bg-[#CBF1FF]',
+  pink: 'bg-[#FFCCEE]',
+  green: 'bg-[#D6F8CA]',
+  yellow: 'bg-[#FFF1B7]',
 }
 
 export default function EnvelopeBase({ color }: EnvelopeBaseProps) {

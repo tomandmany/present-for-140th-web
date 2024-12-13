@@ -19,6 +19,7 @@ const targetMap: Record<string, string> = {
 }
 
 const writers = ['maho', 'rin', 'oni', 'shoya'];
+const colors = ['blue', 'pink', 'green', 'yellow'];
 
 export default function EnvelopeContext({ messages }: EnvelopeContextProps) {
     const [openWriter, setOpenWriter] = useState<string | null>(null);
@@ -38,7 +39,7 @@ export default function EnvelopeContext({ messages }: EnvelopeContextProps) {
                     messages={messages}
                     isOpenEnvelope={openWriter === writer}
                     setOpenWriter={setOpenWriter}
-                    color={index % 2 === 0 ? 'pink' : 'blue'}
+                    color={colors[index]}
                 />
             ))}
         </div>

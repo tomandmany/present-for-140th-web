@@ -14,8 +14,10 @@ interface EnvelopeLidProps {
 }
 
 const colorMap: Record<string, string> = {
-    pink: 'bg-[#F59997]',
-    blue: 'bg-[#7C8EE8]',
+    blue: 'bg-[#98DCF5]',
+    pink: 'bg-[#FDA6DF]',
+    green: 'bg-[#B6E5A7]',
+    yellow: 'bg-[#FFE783]',
 };
 
 export default function EnvelopeLid({ isOpenEnvelope, lidStatus, setLidStatus, letterStatus, playSound, color, writer, handleToggleEnvelope }: EnvelopeLidProps) {
