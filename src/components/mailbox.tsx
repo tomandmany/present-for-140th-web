@@ -44,7 +44,7 @@ export default function Mailbox({ variant = 'blue', target }: MailboxProps) {
 
 function MailboxHead({ colors }: { colors: MailboxColors }) {
     return (
-        <div className="w-[170px] h-[80px] relative">
+        <div className="w-[150px] h-[80px] relative">
             <MailboxSlot colors={colors} />
             <MailboxBody colors={colors} />
         </div>
@@ -90,12 +90,12 @@ function MailboxSlotInside({ colors }: { colors: MailboxColors }) {
 
 function MailboxBody({ colors }: { colors: MailboxColors }) {
     return (
-        <div className="absolute w-[132px] h-[80px] top-0 right-0 z-mailbox-body">
-            <div className={`absolute top-0 left-0 w-[97px] h-[30px] ${borderVariant} border-b-0 border-x-0 ${colors.main}`} />
+        <div className="absolute w-[112px] h-[80px] top-0 right-0 z-mailbox-body">
+            <div className={`absolute top-0 left-0 w-[77px] h-[30px] ${borderVariant} border-b-0 border-x-0 ${colors.main}`} />
             <div
                 className={`absolute top-0 right-0 rounded-[0_100%_0_0] w-[35px] h-[30px] ${borderVariant} border-b-0 border-l-0 ${colors.main}`}
             />
-            <div className={`absolute bottom-0 right-0 w-[132px] h-[50px] ${borderVariant} border-t-0 border-l-0 ${colors.main}`} />
+            <div className={`absolute bottom-0 right-0 w-[112px] h-[50px] ${borderVariant} border-t-0 border-l-0 ${colors.main}`} />
         </div>
     );
 }

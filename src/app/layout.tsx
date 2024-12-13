@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#FFF8FA]`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#FFF8FA] min-h-[100svh]`}
       >
         {children}
         <Image
@@ -35,7 +35,7 @@ export default function RootLayout({
           alt="背景のハート"
           width={800}
           height={100}
-          className="w-full max-w-[600px] h-[400px] fixed bottom-0 left-1/2 -translate-x-1/2 z-bg-heart"
+          className="w-full max-w-[600px] h-[400px] fixed bottom-0 left-1/2 -translate-x-1/2 z-bg-heart opacity-60"
         />
       </body>
     </html>

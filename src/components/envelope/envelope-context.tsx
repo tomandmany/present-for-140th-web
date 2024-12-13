@@ -28,7 +28,7 @@ export default function EnvelopeContext({ messages }: EnvelopeContextProps) {
     const target = pathname.slice(1);
 
     return (
-        <div className="flex flex-col items-center gap-10">
+        <div className="flex flex-col items-center gap-10 py-20">
             <h1 className="text-5xl w-fit">{targetMap[target]}へ</h1>
             {writers.map((writer, index) => (
                 <Envelope

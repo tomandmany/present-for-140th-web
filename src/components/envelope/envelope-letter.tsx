@@ -33,7 +33,7 @@ export default function EnvelopeLetter({
     const animationStyles: Record<typeof letterStatus, string> = {
         inside: 'h-0 pointer-events-none',
         up: `-translate-y-[100vh]`,
-        center: 'translate-y-1/2 z-letter-dialog',
+        center: 'top-1/2 -translate-y-1/2 z-letter-dialog',
     };
 
     // アニメーション開始のトリガー
@@ -68,10 +68,10 @@ export default function EnvelopeLetter({
                             className="fixed inset-0 bg-zinc-900/80 z-letter-dialog-bg"
                             onClick={() => handleToggleEnvelope(writer)}
                         >
-                            <span className="fixed bottom-[100px] left-1/2 -translate-x-1/2 text-white text-xl">閉じる</span>
+                            <span className="fixed bottom-[80px] left-1/2 -translate-x-1/2 text-white text-xl">閉じる</span>
                         </div>
                         <div
-                            className={`absolute top-0 left-1/2 w-[300px] h-[400px] bg-gray-50 origin-bottom transition-[height,transform,box-shadow] duration-1000 -translate-x-1/2 overflow-hidden ${animationStyles[letterStatus]}`}
+                            className={`fixed left-1/2 w-[300px] h-[400px] bg-gray-50 origin-bottom transition-[height,transform,box-shadow] duration-1000 -translate-x-1/2 overflow-hidden ${animationStyles[letterStatus]}`}
                             onTransitionEnd={handleAnimationEnd}
                         >
                             <p className="text-black m-4 text-sm">{currentMessage?.text}</p>
