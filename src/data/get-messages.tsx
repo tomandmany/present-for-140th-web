@@ -28,12 +28,17 @@ export default function getMessages() {
         {
             target: 'sho',
             writer: 'shoya',
-            text: 'Coming soon...'
+            text: '愛しています。愛しているからこそ、もう少し言葉を紡がせてください。'
         },
         {
             target: 'iroha',
             writer: 'maho',
-            text: 'まほの手紙です。lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec odio vitae nunc ultricies ultricies. Donec nec odio vitae nunc ultricies ultricies. Donec nec odio vitae nunc'
+            text: `いろはへ
+二年間お疲れさま！
+いろたんは去年からすっごく話しやすくて、私でも先輩できるんだって思わせてくれた後輩力が高すぎるかわいいかわいい後輩です、重複してるけど笑 ノリで話しまくれちゃうのいつも楽しいな〜って思ってるし、たくさんいじってきてくれるの、実はとっても喜んでますのでこれからもどうぞよろしくです。笑
+コードもできちゃうし、イラストかわいいし、文章チェックもできちゃういろたんは最強です！！運動神経も抜群すぎます＾＾
+そして今年はいろは美容室にとってもお世話になりました！ありがとう！いつかまたして欲しいです！
+二年間ありがとう！またご飯行こうね♡`
         },
         {
             target: 'iroha',
@@ -51,7 +56,7 @@ export default function getMessages() {
         {
             target: 'iroha',
             writer: 'shoya',
-            text: 'Coming soon...'
+            text: '愛しています。愛しているからこそ、もう少し言葉を紡がせてください。'
         },
         {
             target: 'miyuu',
@@ -77,7 +82,7 @@ p.s.ネイルがいつもかわいいぃぃぃぃ！みゆうのネイル見て�
         {
             target: 'miyuu',
             writer: 'shoya',
-            text: 'Coming soon...'
+            text: '愛しています。愛しているからこそ、もう少し言葉を紡がせてください。'
         },
         {
             target: 'yudai',
@@ -107,7 +112,7 @@ p.s.ネイルがいつもかわいいぃぃぃぃ！みゆうのネイル見て�
         {
             target: 'yudai',
             writer: 'shoya',
-            text: 'Coming soon...'
+            text: '愛しています。愛しているからこそ、もう少し言葉を紡がせてください。'
         },
         {
             target: 'atsuko',
@@ -135,7 +140,7 @@ p.s.眼鏡女子仲間できて実はうれしかったよ🫶`
         {
             target: 'atsuko',
             writer: 'shoya',
-            text: 'Coming soon...'
+            text: '愛しています。愛しているからこそ、もう少し言葉を紡がせてください。'
         },
         {
             target: 'hitomi',
@@ -162,7 +167,7 @@ webって初めてのことが多いし、特に今年はできる子がいた�
         {
             target: 'hitomi',
             writer: 'shoya',
-            text: 'Coming soon...'
+            text: '愛しています。愛しているからこそ、もう少し言葉を紡がせてください。'
         },
         {
             target: 'mitsuki',
@@ -189,7 +194,7 @@ webに関しても積極的に質問してがんばってくれてたのちゃ�
         {
             target: 'mitsuki',
             writer: 'shoya',
-            text: 'Coming soon...'
+            text: '愛しています。愛しているからこそ、もう少し言葉を紡がせてください。'
         },
         {
             target: 'taiga',
@@ -217,7 +222,7 @@ webに関しても積極的に質問してがんばってくれてたのちゃ�
         {
             target: 'taiga',
             writer: 'shoya',
-            text: 'Coming soon...'
+            text: '愛しています。愛しているからこそ、もう少し言葉を紡がせてください。'
         },
         {
             target: 'tatsuya',
@@ -243,7 +248,7 @@ webに関しても積極的に質問してがんばってくれてたのちゃ�
         {
             target: 'tatsuya',
             writer: 'shoya',
-            text: 'Coming soon...'
+            text: '愛しています。愛しているからこそ、もう少し言葉を紡がせてください。'
         },
     ]
 }
