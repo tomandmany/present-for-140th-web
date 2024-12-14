@@ -61,7 +61,12 @@ export default function getMessages() {
         {
             target: 'miyuu',
             writer: 'maho',
-            text: 'まほの手紙です。lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec odio vitae nunc ultricies ultricies. Donec nec odio vitae nunc ultricies ultricies. Donec nec odio vitae nunc'
+            text: `みゆうへ
+二年間お疲れさま！
+今年はぜんがで同部屋だったり、サシ行ったりしてたくさん話せたね！嬉しかったです＾＾
+今年は色々変わって大変だったと思うけど、新しいやり方をすぐに学んで実行している姿を見て、やっぱりかっこいいな〜と思ってました、、！投票フォームも間違いなくとってもすごかったからこれからも自信持ってほしいです泣
+私の話をいつも優しく聞いてくれるみゆうに去年からずっと救われてました（ ;  ; ）
+二年間ありがとう！またご飯行こうね♡`
         },
         {
             target: 'miyuu',
