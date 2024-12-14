@@ -1,6 +1,6 @@
 'use client'
 import { usePathname } from "next/navigation";
-import Envelope from "./envelope";
+import Envelope from "@/components/envelope/envelope";
 import { useState } from "react";
 
 interface EnvelopeContextProps {
@@ -16,6 +16,11 @@ const targetMap: Record<string, string> = {
     'iroha': 'いろは',
     'miyuu': 'みゆう',
     'yudai': 'ゆうだい',
+    'atsuko': 'あつこ',
+    'hitomi': 'ひとみ',
+    'mitsuki': 'みつき',
+    'taiga': 'たいが',
+    'tatsuya': 'たつや',
 }
 
 const writers = ['maho', 'rin', 'oni', 'shoya'];

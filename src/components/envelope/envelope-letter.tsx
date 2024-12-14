@@ -21,10 +21,19 @@ interface EnvelopeLetterProps {
     handleToggleEnvelope: (writer: string) => void;
 }
 
-type Page = {
-    id: number;
-    content: string;
-};
+/** テキストを指定文字数ごとに分割し、{id,content} の配列として返す */
+function paginateText(text: string, maxChars: number): { id: number; content: string }[] {
+    const result: { id: number; content: string }[] = [];
+    let start = 0;
+    let pageId = 1;
+    while (start < text.length) {
+        const end = Math.min(start + maxChars, text.length);
+        result.push({ id: pageId, content: text.slice(start, end) });
+        start = end;
+        pageId++;
+    }
+    return result;
+}
 
 export default function EnvelopeLetter({
     isOpenEnvelope,
@@ -35,45 +44,45 @@ export default function EnvelopeLetter({
     letterStatus,
     setLetterStatus,
 }: EnvelopeLetterProps) {
-    const [currentIndex, setCurrentIndex] = useState<number>(0);
-    const pages: Page[] = [
-        { id: 1, content: 'Page 1: Welcome!' },
-        { id: 2, content: 'Page 2: Swipe left or right' },
-        { id: 3, content: 'Page 3: Another Page!' },
-        { id: 4, content: 'Page 4: More Pages!' },
-        { id: 5, content: 'Page 5: Even More!' },
-    ];
+    // 1ページあたりの最大文字数（仮に150に設定。実際は調整）
+    const MAX_CHARS_PER_PAGE = 150;
+
+    // currentMessage?.text をページ分割
+    const pages = paginateText(currentMessage?.text ?? '', MAX_CHARS_PER_PAGE);
     const len = pages.length;
+    const [currentIndex, setCurrentIndex] = useState<number>(0);
 
     const handleSwipe = (direction: 'left' | 'right') => {
         if (direction === 'left') {
+            // 次ページへ
             setCurrentIndex((prev) => (prev + 1) % len);
         } else if (direction === 'right') {
+            // 前ページへ
             setCurrentIndex((prev) => (prev - 1 + len) % len);
         }
     };
 
-    // マウスでもスワイプ扱いで検知したい場合は trackMouse: true
+    // スワイプ検知 (PCのドラッグ操作もスワイプ扱いで認識: trackMouse:true)
     const handlers = useSwipeable({
         onSwipedLeft: () => handleSwipe('left'),
         onSwipedRight: () => handleSwipe('right'),
         preventScrollOnSwipe: true,
-        trackMouse: true, // ← デスクトップ環境のドラッグ操作もスワイプ扱いで検知
+        trackMouse: true,
     });
 
-    // 状態ごとのスタイルを定義
+    // アニメーション用のスタイルマップ
     const animationStyles: Record<typeof letterStatus, string> = {
         inside: 'h-0 pointer-events-none',
         up: `-translate-y-[100vh]`,
-        center: 'top-1/2 -translate-y-1/2 z-letter-dialog',
+        center: 'z-letter-dialog',
     };
 
-    // アニメーション開始のトリガー
     useEffect(() => {
         if (isOpenEnvelope && lidStatus === 'open') {
             setLetterStatus('up');
         } else if (!isOpenEnvelope) {
             setLetterStatus('inside');
+            setCurrentIndex(0); // 閉じたらページをリセットする場合
         }
     }, [isOpenEnvelope, lidStatus, setLetterStatus]);
 
@@ -85,14 +94,18 @@ export default function EnvelopeLetter({
 
     return (
         <>
+            {/* 封筒から「取り出す」アニメーション中の要素 */}
             {letterStatus !== 'center' && (
                 <div
                     className={`absolute top-0 left-1/2 w-[80%] bg-gray-50 origin-bottom transition-[height,transform,box-shadow] duration-1000 -translate-x-1/2 overflow-hidden z-envelope-letter ${animationStyles[letterStatus]}`}
                     onTransitionEnd={handleAnimationEnd}
                 >
-                    <p className="text-black m-4 text-sm">{currentMessage?.text}</p>
+                    {/* 一時的に封筒の中にあるように見える段階。中身は非表示でもOK */}
+                    <p className="text-black m-4 text-sm">{/* 封筒の中身ダミー */}</p>
                 </div>
             )}
+
+            {/* レターが画面中央に展開した後のポータル */}
             {letterStatus === 'center' && (
                 createPortal(
                     <>
@@ -101,44 +114,42 @@ export default function EnvelopeLetter({
                             className="fixed inset-0 bg-zinc-900/80 z-letter-dialog-bg"
                             onClick={() => handleToggleEnvelope(writer)}
                         >
-                            <span className="fixed bottom-[80px] left-1/2 -translate-x-1/2 text-white text-xl">閉じる</span>
+                            <div className="relative h-[100svh] flex justify-center items-center">
+                                {pages.map((page, i) => {
+                                    const distance = (i - currentIndex + len) % len;
+                                    // 0: 現在ページ、1: 次ページ、2: 次々ページ 以外は非表示
+                                    if (distance > 2) return null;
+
+                                    const transformOffset = distance * 10; 
+                                    const zIndex = 50 - distance;
+                                    const contentVisible = distance === 0;
+
+                                    return (
+                                        <div
+                                            key={page.id}
+                                            className={`absolute cursor-grab select-none w-[300px] h-[400px] shadow-xl p-4 bg-[#EFEEE5] origin-bottom transition-[height,transform,box-shadow] duration-1000 ${animationStyles[letterStatus]}`}
+                                            style={{
+                                                transform: `translateX(${transformOffset}px) translateY(${transformOffset}px)`,
+                                                zIndex,
+                                            }}
+                                            onTransitionEnd={handleAnimationEnd}
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            {contentVisible && (
+                                                <>
+                                                    <p className="flex h-full text-lg font-bold whitespace-pre-wrap overflow-auto">
+                                                        {page.content}
+                                                    </p>
+                                                    <span className='fixed right-6 bottom-6'>
+                                                        {`${i + 1}/${len}`}
+                                                    </span>
+                                                </>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
-                        {/* <div
-                            className={`fixed left-1/2 w-[300px] h-[400px] bg-gray-50 origin-bottom transition-[height,transform,box-shadow] duration-1000 -translate-x-1/2 overflow-hidden ${animationStyles[letterStatus]}`}
-                            onTransitionEnd={handleAnimationEnd}
-                        >
-                            <p className="text-black m-4 text-sm">{currentMessage?.text}</p>
-                        </div> */}
-                        {pages.map((page, i) => {
-                            const distance = (i - currentIndex + len) % len;
-                            if (distance > 2) return null;
-
-                            const transformOffset = distance * 10;
-                            const zIndex = 50 - distance;
-                            const contentVisible = distance === 0;
-
-                            return (
-                                <div
-                                    key={page.id}
-                                    className={`fixed left-1/2 w-[300px] h-[400px] bg-gray-50 origin-bottom transition-[height,transform,box-shadow] duration-1000 -translate-x-1/2 ${animationStyles[letterStatus]}`}
-                                    style={{
-                                        transform: `translateX(${transformOffset}px) translateY(${transformOffset}px)`,
-                                        zIndex,
-                                    }}
-                                    onTransitionEnd={handleAnimationEnd}
-                                >
-                                    {contentVisible && (
-                                        <>
-                                            <p className="flex h-full text-lg font-bold">
-                                                {page.content}
-                                            </p>
-                                            <span className='fixed right-6 bottom-6'>{i + 1}</span>
-                                        </>
-                                    )}
-                                    {/* <p className="text-black m-4 text-sm">{currentMessage?.text}</p> */}
-                                </div>
-                            );
-                        })}
                     </>,
                     document.body
                 )

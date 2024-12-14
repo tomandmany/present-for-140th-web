@@ -8,11 +8,11 @@ export default function Home() {
       <Mailbox target="iroha" variant='pink' />
       <Mailbox target="miyuu" variant='pink' />
       <Mailbox target="yudai" variant='orange' />
-      <Mailbox target="" variant='orange' />
-      <Mailbox target="" variant='blue' />
-      <Mailbox target="" variant='blue' />
-      <Mailbox target="" variant='pink' />
-      <Mailbox target="" variant='orange' />
+      <Mailbox target="atsuko" variant='orange' />
+      <Mailbox target="hitomi" variant='blue' />
+      <Mailbox target="mitsuki" variant='pink' />
+      <Mailbox target="taiga" variant='orange' />
+      <Mailbox target="tatsuya" variant='blue' />
     </main>
   );
 }

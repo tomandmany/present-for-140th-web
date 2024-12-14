@@ -24,6 +24,18 @@ const colorMap: Record<MailboxVariant, MailboxColors> = {
     },
 };
 
+const targetMap: Record<string, string> = {
+    'sho': 'しょう',
+    'iroha': 'いろは',
+    'miyuu': 'みゆう',
+    'yudai': 'ゆだい',
+    'atsuko': 'あつこ',
+    'hitomi': 'ひとみ',
+    'mitsuki': 'みつき',
+    'taiga': 'たいが',
+    'tatsuya': 'たつや',
+}
+
 const borderVariant = 'border-2 border-black';
 
 interface MailboxProps {
@@ -33,20 +45,21 @@ interface MailboxProps {
 
 export default function Mailbox({ variant = 'blue', target }: MailboxProps) {
     const colors = colorMap[variant];
+    const displayName = targetMap[target] ?? target;
 
     return (
         <Link href={`/${target}`} className="hover:scale-110 transition cursor-pointer w-fit relative z-mailbox">
-            <MailboxHead colors={colors} />
+            <MailboxHead colors={colors} displayName={displayName} />
             <MailboxFoot colors={colors} />
         </Link>
     );
 }
 
-function MailboxHead({ colors }: { colors: MailboxColors }) {
+function MailboxHead({ colors, displayName }: { colors: MailboxColors, displayName: string }) {
     return (
         <div className="w-[150px] h-[80px] relative">
             <MailboxSlot colors={colors} />
-            <MailboxBody colors={colors} />
+            <MailboxBody colors={colors} displayName={displayName} />
         </div>
     );
 }
@@ -88,14 +101,16 @@ function MailboxSlotInside({ colors }: { colors: MailboxColors }) {
     );
 }
 
-function MailboxBody({ colors }: { colors: MailboxColors }) {
+function MailboxBody({ colors, displayName }: { colors: MailboxColors, displayName: string }) {
     return (
         <div className="absolute w-[112px] h-[80px] top-0 right-0 z-mailbox-body">
             <div className={`absolute top-0 left-0 w-[77px] h-[30px] ${borderVariant} border-b-0 border-x-0 ${colors.main}`} />
             <div
                 className={`absolute top-0 right-0 rounded-[0_100%_0_0] w-[35px] h-[30px] ${borderVariant} border-b-0 border-l-0 ${colors.main}`}
             />
-            <div className={`absolute bottom-0 right-0 w-[112px] h-[50px] ${borderVariant} border-t-0 border-l-0 ${colors.main}`} />
+            <div className={`absolute bottom-0 right-0 w-[112px] h-[50px] ${borderVariant} border-t-0 border-l-0 ${colors.main}`}>
+                <span className="absolute right-4 top-1 p-px bg-[#F2ECEC] border border-black rounded-[2px] text-sm">{displayName}</span>
+            </div>
         </div>
     );
 }
