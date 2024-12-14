@@ -101,7 +101,7 @@ export default function EnvelopeLetter({
                     onTransitionEnd={handleAnimationEnd}
                 >
                     {/* 一時的に封筒の中にあるように見える段階。中身は非表示でもOK */}
-                    <p className="text-black m-4 text-sm">{/* 封筒の中身ダミー */}</p>
+                    <p className="text-black m-4 text-sm">{currentMessage.text}</p>
                 </div>
             )}
 
